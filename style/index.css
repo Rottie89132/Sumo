@@ -1,0 +1,36 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+.main-section {
+    background-color: #f1f1f1;
+}
+
+
+.nav-bg-pinky {
+    background-color: #CFB6B6;
+}
+
+.footer-pink {
+    background-color: #EC9999;
+}
+
+.btn-gray{
+    background-color: lightgrey;
+    border: none;
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+#image-header {
+    display: block;
+    justify-content: center;
+    height: 40vh;
+    align-items: center;
+    background: url("../media/Headimg.png") 0px 0px/auto no-repeat fixed;
+}
+
+.colom{
+    padding: 60px;   
+}

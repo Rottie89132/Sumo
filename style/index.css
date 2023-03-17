@@ -34,3 +34,52 @@
 .colom{
     padding: 60px;   
 }
+
+.bg-grayish {
+    background-color: #F6F6F6;
+}
+
+.bg-graydarker {
+    background-color: #EBEBEB;
+}
+
+.bg-graydarker:hover {
+    background-color: #e4e4e4;
+}
+
+.hoverable {
+    opacity: 0.5;
+    transition: all 1s;
+}
+
+.hoverable:hover {
+    opacity: 1;
+    scale: 1.1;
+    filter: none;
+}
+
+.full {
+    height: 75vh;
+}
+
+.text-pinky {
+    color: #F88888;
+}
+
+.btn-yellowish {
+    background-color: #FBBD23;
+}
+
+.bg-pinkyish {
+    background-color: #F88888;
+}
+
+.pb-10 {
+    padding-bottom: 5em;
+}
+
+.pb-8 {
+    padding-bottom: 3em;
+}
+
+

@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <nav class="navbar nav-bg-pinky position-sticky w-100 top-0 start-0">
+  <nav class="navbar nav-bg-pinky position-sticky w-100 top-0 start-0" style="z-index: +1;">
     <div class="container-fluid">
       <span class="navbar-brand m-2">
         <a class="nav-link" href="/index.html">
@@ -40,13 +40,13 @@
     </div>
   </nav>
   <main class="container-fluid justify-content-center pb-2">
-    <div class="row">
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="z-index: +1;">
+    <div class="row pb-5">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
         <div class="position-relative pt-3 sidebar-relative">
           <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <span class="fs-4 text-black fw-bold mb-4"> Categorieen </span>
           </a>
-          <ul class="nav flex-column full">
+          <ul class="nav flex-column">
             <div class="row g-4">
               <div class="col-md-6">
                 <div class="card-body bg-graydarker rounded-2">
@@ -55,7 +55,7 @@
               </div>
               <div class="col-md-6">
                 <div class="card-body bg-graydarker rounded-2">
-                  <a href="" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                  <a href="" data-toggle="tooltip" data-placement="top" title="Tooltip on top" data-bs-custom-class="custom-tooltip">
                     <img
                     src="./media/chick.png"
                     alt="" class="img-fluid" />

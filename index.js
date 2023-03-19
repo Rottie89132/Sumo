@@ -80,6 +80,7 @@ function addToCart(naam) {
 
 function updateCart() {
     let cart = JSON.parse(sessionStorage.getItem('cart'))
+    if(!cart) return;
     let prijs = 0;
     cart.forEach(product => {
         console.log(product)
@@ -89,8 +90,7 @@ function updateCart() {
     cartBody.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> €${prijs.toFixed(2)}`
 }
 
-
-document.addEventListener('DOMContentLoaded', function() {
+window.onload = () => {
     updateCart()
     let productenBody = document.getElementById('producten')
     productenLijst.forEach(product => {
@@ -116,4 +116,4 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>`
     });
-})
+}

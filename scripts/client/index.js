@@ -135,6 +135,14 @@ let productenLijst = [
   },
 ];
 
+if (!("Notification" in window)) {
+  alert("This browser does not support desktop notification");
+} 
+
+else if (Notification.permission !== "denied") {
+  Notification.requestPermission()
+}
+
 function addToCart(naam) {
     if (sessionStorage.length === 0) {
         let product = productenLijst.find(item => item.naam === naam);
@@ -163,6 +171,12 @@ function addToCart(naam) {
                 huidigProduct.aantal++
                 huidigProduct.prijs += product.prijs;
                 sessionStorage.setItem('cart', JSON.stringify(cart))
+            }
+
+            if (Notification.permission === "granted") {
+              new Notification(`${product.naam.toUpperCase().charAt(0) + product.naam.toLowerCase().slice(1)} added to cart!`, {
+                body: `${product.beschrijving}`, icon: `./media/${product.image}`
+              });
             }
         }
     }
@@ -238,5 +252,26 @@ function categorie(naam) {
       </div>`
     });
   }
+  window.jsPDF = window.jspdf.jsPDF;
 
+  function Convert_HTML_To_PDF() {
+    var doc = new jsPDF();
+    
+  
+    // Source HTMLElement or a string containing HTML.
+    var elementHTML = document.querySelector("#producten");
+
+    doc.html(elementHTML, {
+        callback: function(doc) {
+            // Save the PDF
+            doc.save('document-html.pdf');
+        },
+        margin: [10, 10, 10, 10],
+        autoPaging: 'text',
+        x: 0,
+        y: 0,
+        width: 190, //target width in the PDF document
+        windowWidth: 675 //window width in CSS pixels
+    });
+}
 

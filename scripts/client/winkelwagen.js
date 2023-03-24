@@ -135,6 +135,51 @@ let productenLijst = [
     },
   ];
 
+function updateWinkel(cart){
+    let winkelwagenBody = document.getElementById('winkelwagenBody')
+    let btwBody = document.getElementById("btw");
+    let kortingBody = document.getElementById("korting");
+    let totaalBody = document.getElementById("totaal");
+    let totaalPrijs = 0;
+    let btw = 0;
+    let korting = 0;
+    winkelwagenBody.innerHTML = ''
+
+    cart.forEach(product => {
+        totaalPrijs += product.prijs;
+        winkelwagenBody.innerHTML += `
+        <tr>
+            <td>${product.naam}</td>
+            <td>$${product.prijs.toFixed(2)}</td>
+            <td>${product.aantal}</td>
+            <td><button class="btn btn" onclick="addToCart('${product.naam}')"><i class="fa-solid fa-plus"></i></button><button class="btn" onclick="RemoveFromCart('${product.naam}')"><i class="fa-solid fa-trash-can"></i></button></td>
+        </tr>`
+    });
+
+    btw = Number(totaalPrijs) * 0.09
+    btwBody.innerHTML = '€' + btw.toFixed(2)
+    totaalBody.innerHTML = '€' + totaalPrijs.toFixed(2);
+
+    if(totaalPrijs <= 0 ) {
+        winkelwagenBody.innerHTML = ''
+    }
+    
+    if (totaalPrijs >= 50) {
+
+        korting = totaalPrijs * 0.15;
+        btw = Number(totaalPrijs.toFixed(2) - korting.toFixed(2)) * 0.09
+        let nieuwPrijs = totaalPrijs.toFixed(2) - korting.toFixed(2)
+        kortingBody.innerHTML = '€' + korting.toFixed(2);
+
+        totaalBody.innerHTML = `<span class="text-decoration-line-through" style="color: red;">€${totaalPrijs.toFixed(2) }</span>`+ `<span class='ms-3 text-decoration-none'>€${nieuwPrijs.toFixed(2)}</span>`;
+        btwBody.innerHTML = '€' + btw.toFixed(2)
+    } else {
+        kortingBody.innerHTML = '€0.00'
+    }
+    updateCart()
+}
+
+
 function updateCart() {
     let cart = JSON.parse(sessionStorage.getItem('cart'))
     if(!cart) return;
@@ -150,6 +195,7 @@ function updateCart() {
 function addToCart(naam) {
     let product = productenLijst.find(item => item.naam === naam);
     let cart = JSON.parse(sessionStorage.getItem('cart')) || []
+    console.log(cart)
     let huidigProduct = cart.find(item => item.naam == naam)
 
     huidigProduct.aantal++
@@ -157,8 +203,7 @@ function addToCart(naam) {
     sessionStorage.setItem('cart', JSON.stringify(cart))
     
     console.log(huidigProduct)
-
-    
+    updateWinkel(cart)
 }
 
 function RemoveFromCart(naam) {
@@ -166,11 +211,14 @@ function RemoveFromCart(naam) {
     let cart = JSON.parse(sessionStorage.getItem('cart')) || []
     let huidigProduct = cart.find(item => item.naam == naam)
 
+    if(huidigProduct.aantal <= 0) return;
+
     huidigProduct.aantal--
     huidigProduct.prijs -= product.prijs;
     sessionStorage.setItem('cart', JSON.stringify(cart))
     
     console.log(huidigProduct)
+    updateWinkel(cart)
     
 }
 
@@ -207,6 +255,11 @@ function winkelwagen() {
     });
 
     //Hier begin je
+
+    console.log(totaalPrijs <= 0 )
+    if(totaalPrijs <= 0 ) {
+        document.getElementById('winkelwagenBody').innerHTML = ''
+    }
     
     btw = Number(totaalPrijs) * 0.09
     btwBody.innerHTML = '€' + btw.toFixed(2)

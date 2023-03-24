@@ -167,7 +167,9 @@ function addToCart(naam) {
                 }
                 cart.push(nieuwProduct)
                 sessionStorage.setItem('cart', JSON.stringify(cart))
-            } else {
+            } 
+            
+            else {
                 huidigProduct.aantal++
                 huidigProduct.prijs += product.prijs;
                 sessionStorage.setItem('cart', JSON.stringify(cart))
@@ -188,7 +190,6 @@ function updateCart() {
     if(!cart) return;
     let prijs = 0;
     cart.forEach(product => {
-        console.log(product)
         prijs += product.prijs;
     });
     let cartBody = document.getElementById('cart')

@@ -47,9 +47,15 @@ function winkelwagen() {
     btwBody.innerHTML = '€' + btw.toFixed(2)
     totaalBody.innerHTML = '€' + totaalPrijs.toFixed(2);
     
-    if (totaalPrijs >= 30) {
-        korting = totaalPrijs * 0.1;
+    if (totaalPrijs >= 50) {
+
+        korting = totaalPrijs * 0.15;
+        btw = Number(totaalPrijs.toFixed(2) - korting.toFixed(2)) * 0.09
+        let nieuwPrijs = totaalPrijs.toFixed(2) - korting.toFixed(2)
         kortingBody.innerHTML = '€' + korting.toFixed(2);
+
+        totaalBody.innerHTML = `<span class="text-decoration-line-through" style="color: red;">€${totaalPrijs.toFixed(2) }</span>`+ `<span class='ms-3 text-decoration-none'>€${nieuwPrijs.toFixed(2)}</span>`;
+        btwBody.innerHTML = '€' + btw.toFixed(2)
     } else {
         kortingBody.innerHTML = '€0.00'
     }

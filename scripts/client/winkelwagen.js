@@ -147,13 +147,16 @@ function updateWinkel(cart){
 
     cart.forEach(product => {
         totaalPrijs += product.prijs;
-        winkelwagenBody.innerHTML += `
-        <tr>
-            <td>${product.naam}</td>
-            <td>$${product.prijs.toFixed(2)}</td>
-            <td>${product.aantal}</td>
-            <td><button class="btn btn" onclick="addToCart('${product.naam}')"><i class="fa-solid fa-plus"></i></button><button class="btn" onclick="RemoveFromCart('${product.naam}')"><i class="fa-solid fa-trash-can"></i></button></td>
-        </tr>`
+
+        if(product.aantal >= 1){
+            winkelwagenBody.innerHTML += `
+            <tr>
+                <td>${product.naam}</td>
+                <td>$${product.prijs.toFixed(2)}</td>
+                <td>${product.aantal}</td>
+                <td><button class="btn btn" onclick="addToCart('${product.naam}')"><i class="fa-solid fa-plus"></i></button><button class="btn" onclick="RemoveFromCart('${product.naam}')"><i class="fa-solid fa-trash-can"></i></button></td>
+            </tr>`
+        } 
     });
 
     btw = Number(totaalPrijs) * 0.09
@@ -162,6 +165,7 @@ function updateWinkel(cart){
 
     if(totaalPrijs <= 0 ) {
         winkelwagenBody.innerHTML = ''
+        sessionStorage.removeItem('cart')
     }
     
     if (totaalPrijs >= 50) {
@@ -202,7 +206,6 @@ function addToCart(naam) {
     huidigProduct.prijs += product.prijs;
     sessionStorage.setItem('cart', JSON.stringify(cart))
     
-    console.log(huidigProduct)
     updateWinkel(cart)
 }
 
@@ -217,7 +220,6 @@ function RemoveFromCart(naam) {
     huidigProduct.prijs -= product.prijs;
     sessionStorage.setItem('cart', JSON.stringify(cart))
     
-    console.log(huidigProduct)
     updateWinkel(cart)
     
 }
@@ -256,9 +258,10 @@ function winkelwagen() {
 
     //Hier begin je
 
-    console.log(totaalPrijs <= 0 )
+    
     if(totaalPrijs <= 0 ) {
         document.getElementById('winkelwagenBody').innerHTML = ''
+        sessionStorage.removeItem('cart')
     }
     
     btw = Number(totaalPrijs) * 0.09

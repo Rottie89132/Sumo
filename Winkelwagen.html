@@ -15,6 +15,11 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/23451d210d.js" crossorigin="anonymous"></script>
+  <link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 </head>
 
 <body>
@@ -28,7 +33,7 @@
       <div class="justify-content-end m-4 fw-bolder">
         <div class="navbar-nav flex-row gap-4">
           <a class="nav-link" href="./bestel.html">Bestellen</a>
-          <a class="nav-link" href="./bestel.html">Menu</a>
+          <a class="nav-link" href="./menu/menu.pdf" download ><i class="fa-solid fa-download"></i> Menu</a>
           <a class="nav-link" href="./Info.html">Informatie</a>
           <a class="nav-link active" href="#" id="cart"><i class="fa-solid fa-cart-shopping"></i> €0.00</a>
           
@@ -39,10 +44,10 @@
   <main class="container-fluid justify-content-center align-items-center pb-2 h-100 position-fixed overflow-scroll " style="background-image: url('./media/Backgrond.jpg'); margin-top: -1em;">
     <div class="d-flex justify-content-center align-items-center">
       <div class="col-md-4">
-        <div class="card rounded-4 p-3" style="margin-bottom: 10.5em; margin-top: 1.5em;">
-          <h2 class="card-title">Winkelwagen</h2>
+        <div id="popup" class="card rounded-4 p-3" style="margin-bottom: 10.5em; margin-top: 1.5em;">
+          <h2 id="Subject" class="card-title">Winkelwagen</h2>
           <hr>
-          <div class="card-body">
+          <div id="content" class="card-body">
               <table class="table table-borderless">
                 <thead>
                   <tr>
@@ -70,7 +75,7 @@
                 </div>
                 <div class="col-4"></div>
                 <hr>
-                <button class="btn btn-warning text-light" style="width: 38%;">Volgende stap <i class="fa-solid fa-circle-arrow-right ms-3"></i></button>
+                <button id="NextStep" class="btn btn-warning text-light" style="width: 38%;">Volgende stap <i class="fa-solid fa-circle-arrow-right ms-2"></i></button>
               </div>
           </div>
         </div>

@@ -170,6 +170,9 @@ function updateWinkel(cart) {
   if (totaalPrijs <= 0) {
     winkelwagenBody.innerHTML = "";
     sessionStorage.removeItem("cart");
+
+    const button = document.querySelector('#NextStep');
+    button.disabled = true;
   } 
   
   else if (totaalPrijs >= 50) {
@@ -235,6 +238,10 @@ function winkelwagen() {
     btwBody.innerHTML = "€0.00";
     totaalBody.innerHTML = "€0.00";
     kortingBody.innerHTML = "€0.00";
+    
+    const button = document.querySelector('#NextStep');
+    button.disabled = true;
+
     return;
   }
 
@@ -286,4 +293,93 @@ function winkelwagen() {
   else { kortingBody.innerHTML = "€0.00" };
 }
 
-window.onload = () => { updateCart(); winkelwagen(); };
+window.onload = () => { 
+  updateCart(); winkelwagen(); 
+
+  const button = document.querySelector('#NextStep')
+  button.onclick = () => {
+    button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>'
+    
+    setTimeout( () => {
+      document.querySelector("#Subject").innerHTML = 'Bestelling afronden'
+      document.querySelector('#content').innerHTML = 
+      `<form>
+        <label class="form-label">Voornaam <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" placeholder="John" name="" id="naam" required/>
+
+        <label class="form-label">Achternaam <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" placeholder="van Hoost" name="" id="" required/>
+
+        <label class="form-label">Straatnaam en huisnummer <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" placeholder="Langestraat 10" name="" id="Straatnummer" required/>
+
+        <label class="form-label">Postcode <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" placeholder="1234 AB" name="" id="Postcode" required/>
+
+        <label class="form-label">Stad <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" placeholder="Rotterdam" name="" id="Stad" required/>
+
+        <label class="form-label">Verdieping/Complex</label>
+        <input type="text" class="form-control" placeholder="verdieping 1, Complex A" name="" id=""/>
+        
+        <label class="form-label">E-mail <span class="text-danger">*</span></label>
+        <input type="email" class="form-control" placeholder="1234@abcd.nl" name="" id="" required/>
+
+        <label class="form-label d-block ">Telefoonnummer <span class="text-danger">*</span></label>
+        <input type="tel" class="form-control w-100" placeholder="06 1234567890" name="" id="telefoon" required/>
+
+        <label class="form-label d-block mt-3">Opmerking</label>
+        <input type="text" class="form-control" placeholder="..." name="" id=""/>
+        
+        <hr />
+        <button id="Bestelen" class="btn btn-warning text-light" style="width: 38%;">Afrekenen <i class="fa-solid fa-hand-holding-dollar ms-2"></i></button>
+      </form>`
+
+      const phoneInputField = document.querySelector("#telefoon");
+      const phoneInput = window.intlTelInput(phoneInputField, {
+        preferredCountries: ["nl"],
+        utilsScript:
+          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+      });
+    },1000)
+  }
+
+};
+
+window.onsubmit = (event) => {
+  event.preventDefault();
+  let naam = document.querySelector('#naam')
+  let Straatnummer = document.querySelector('#Straatnummer')
+  let Postcode = document.querySelector('#Postcode')
+  let stad = document.querySelector('#Stad')
+  sessionStorage.removeItem("cart");
+
+  document.getElementById('cart').innerHTML = `<i class="fa-solid fa-cart-shopping"></i> €0.00`
+  document.querySelector("#popup").innerHTML = 
+  `
+  <h2 id="msg" class="card-title">Bedankt voor je bestelling!</h2>
+    <p> ${naam.value.charAt(0).toUpperCase() + naam.value.slice(1)} we hopen je vaker terug te zien. </p>
+    <p style="margin-bottom: -0.4em;"> ${Straatnummer.value} </p>
+    <p> ${Postcode.value} ${stad.value} </p>
+  <hr>
+    <img id='progress' src="./media/besteld.png"/>
+  `
+  setTimeout(() =>{
+    document.querySelector("#popup").innerHTML = `
+    <h2 class="card-title">Bestelling bezorgt!</h2>
+    <p> Ze staan nu bij u voor de deur. </p>
+    
+  <hr>
+    <img src="./media/bezorgt.png"/>`
+
+    setTimeout(() =>{
+      window.location.href = './'
+    }, 5000)
+
+  }, 5000)
+
+  
+
+}
+
+

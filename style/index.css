@@ -86,3 +86,7 @@
     background-color: #F5F5F5;
 }
 
+form input {
+    margin-bottom: 1em;
+}
+

@@ -171,6 +171,9 @@ function updateWinkel(cart) {
     winkelwagenBody.innerHTML = "";
     sessionStorage.removeItem("cart");
 
+    let cartBody = document.getElementById("cart");
+    cartBody.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> €0.00`;
+
     const button = document.querySelector('#NextStep');
     button.disabled = true;
   } 
@@ -225,6 +228,7 @@ function RemoveFromCart(naam) {
   sessionStorage.setItem("cart", JSON.stringify(cart));
 
   updateWinkel(cart);
+  
 }
 
 function winkelwagen() {
